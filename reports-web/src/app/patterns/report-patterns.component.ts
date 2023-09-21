@@ -1,4 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {BehaviorSubject, filter, switchMap} from "rxjs";
+import {Subsystem} from "../shared/model/subsystem";
+import {ReportPatternsService} from "./service/report-patterns.service";
 
 @Component({
   selector: 'app-report-patterns',
@@ -8,6 +11,14 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 })
 export class ReportPatternsComponent {
 
-  constructor() { }
+  private subsystemSubject = new BehaviorSubject<Subsystem>(null);
+
+  reportPatterns$ = this.subsystemSubject.pipe(
+    filter(subsystem => !!subsystem),
+    switchMap(({name}) => this.reportPatternsService.reportPatterns(name))
+  )
+
+  constructor(private reportPatternsService: ReportPatternsService) {
+  }
 
 }

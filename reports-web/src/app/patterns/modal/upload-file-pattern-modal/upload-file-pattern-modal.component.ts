@@ -7,12 +7,23 @@ import {MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./upload-file-pattern-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UploadFilePatternModalComponent{
+export class UploadFilePatternModalComponent {
+
+  private _file: any;
 
   constructor(public dialogRef: MatDialogRef<UploadFilePatternModalComponent>) {}
 
 
-  onFileSelected(file: Event) {
+  onFileSelected(event: any) {
+    this._file = event.target.files[0];
+  }
 
+
+  upload(): void {
+    this.dialogRef.close(this._file);
+  }
+
+  get fileUploaded(): boolean {
+    return this._file != null;
   }
 }

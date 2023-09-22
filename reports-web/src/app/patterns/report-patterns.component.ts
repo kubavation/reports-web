@@ -65,6 +65,10 @@ export class ReportPatternsComponent implements AfterViewInit {
     this._dialog.open(UploadFilePatternModalComponent, {
       width: '50%',
       height: '40%'
-    })
+    }).afterClosed()
+      .pipe(
+        switchMap(file => this.reportPatternsService.uploadPatternFile(this.selectedPatternSubject.value?.id, file))
+      )
+      .subscribe();
   }
 }

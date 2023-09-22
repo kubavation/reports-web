@@ -1,5 +1,13 @@
 <div style="width: 100%" *ngIf="modules$ | async">
 
+  <mat-form-field>
+    <mat-label>Subsystem</mat-label>
+    <mat-select [formControl]="subsystemControl" required>
+      <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
+        {{subsystem.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
 

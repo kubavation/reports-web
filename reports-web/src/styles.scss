@@ -18,3 +18,15 @@ table {
   font-weight: bold;
   background-color: lightgray;
 }
+
+
+.mat-dialog-content-container {
+  height: calc(100% - 120px);
+}
+
+.dialog-action-container {
+  display: flex;
+  justify-content: right;
+  align-items: end;
+}
+

@@ -11,6 +11,8 @@ export class UploadFilePatternModalComponent {
 
   private _file: any;
 
+  readonly requiredType = '.jrxml';
+
   constructor(public dialogRef: MatDialogRef<UploadFilePatternModalComponent>) {}
 
 

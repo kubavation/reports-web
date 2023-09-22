@@ -14,7 +14,7 @@ export class ReportPatternsService {
   }
 
   public reportPatterns(subsystem: string): Observable<ReportPattern[]> {
-    return this.http.get<ReportPattern[]>(`${environment.reportsUrl}/report-patterns/subsystem/${subsystem}`);
+    return this.http.get<ReportPattern[]>(`${environment.url}/reports-service/report-patterns/subsystem/${subsystem}`);
   }
 
 }

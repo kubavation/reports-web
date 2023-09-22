@@ -1,0 +1,46 @@
+<div style="width: 100%">
+
+  <mat-form-field>
+    <mat-label>Subsystem</mat-label>
+    <mat-select [formControl]="subsystemControl" required>
+      <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
+        {{subsystem.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="subsystemControl.hasError('required')">First you have to choose subsystem</mat-error>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
+
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subsystem">
+      <th mat-header-cell *matHeaderCellDef> Subsystem </th>
+      <td mat-cell *matCellDef="let element"> {{element.subsystem}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row
+        (click)="onSelection(row)"
+        [class.row-selected]="selected === row"
+        *matRowDef="let row; columns: columns;"></tr>
+  </table>
+
+  <div style="margin-top: 5%">
+    <app-report-pattern-parameters
+      [parameters]="reportPatternParameters$ | async">
+    </app-report-pattern-parameters>
+  </div>
+
+
+
+</div>

@@ -27,6 +27,12 @@ export class ReportPatternsComponent implements AfterViewInit {
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name))
   )
 
+  reportPatternParameters$ = this.selectedPatternSubject
+    .pipe(
+      filter(pattern => !!pattern),
+      switchMap(({id}) => this.reportPatternsService.reportPatternParameters(id))
+    )
+
   dataSource$ = this.subsystemControl.valueChanges.pipe(
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),

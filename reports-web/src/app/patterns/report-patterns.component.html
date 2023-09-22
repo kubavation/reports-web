@@ -35,6 +35,11 @@
         *matRowDef="let row; columns: columns;"></tr>
   </table>
 
+  <div style="margin-top: 5%">
+    <app-report-pattern-parameters
+      [parameters]="reportPatternParameters$ | async">
+    </app-report-pattern-parameters>
+  </div>
 
 
 

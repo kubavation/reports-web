@@ -22,4 +22,11 @@ export class ReportPatternsService {
     return this.http.get<ReportPatternParameter[]>(`${environment.url}/reports-service/report-patterns/${patternId}/parameters`);
   }
 
+  public uploadPatternFile(patternId: number, file: any): Observable<void> {
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.patch<void>(`${environment.url}/reports-service/report-patterns/${patternId}/files`, formData);
+  }
 }

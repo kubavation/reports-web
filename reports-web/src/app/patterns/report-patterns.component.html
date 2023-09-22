@@ -10,6 +10,8 @@
     <mat-error *ngIf="subsystemControl.hasError('required')">First you have to choose subsystem</mat-error>
   </mat-form-field>
 
+  <button mat-raised-button (click)="openUploadDialog()">Upload file pattern</button>
+
   <table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
 
 
@@ -21,6 +23,11 @@
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Description </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fileName">
+      <th mat-header-cell *matHeaderCellDef> fileName </th>
+      <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="subsystem">

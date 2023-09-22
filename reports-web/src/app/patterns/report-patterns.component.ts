@@ -6,6 +6,8 @@ import {ModulesService} from "../shared/modules/service/modules.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {ReportPattern} from "./model/report-pattern";
 import {FormControl} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {UploadFilePatternModalComponent} from "./modal/upload-file-pattern-modal/upload-file-pattern-modal.component";
 
 @Component({
   selector: 'app-report-patterns',
@@ -40,10 +42,11 @@ export class ReportPatternsComponent implements AfterViewInit {
   )
 
 
-  readonly columns = ['name', 'description', 'subsystem'];
+  readonly columns = ['name', 'description', 'fileName', 'subsystem'];
 
   constructor(private reportPatternsService: ReportPatternsService,
-              private modulesService: ModulesService) {
+              private modulesService: ModulesService,
+              private _dialog: MatDialog) {
   }
 
   ngAfterViewInit() {
@@ -58,4 +61,14 @@ export class ReportPatternsComponent implements AfterViewInit {
     return this.selectedPatternSubject.getValue();
   }
 
+  openUploadDialog(): void   {
+    this._dialog.open(UploadFilePatternModalComponent, {
+      width: '50%',
+      height: '40%'
+    }).afterClosed()
+      .pipe(
+        switchMap(file => this.reportPatternsService.uploadPatternFile(this.selectedPatternSubject.value?.id, file))
+      )
+      .subscribe();
+  }
 }

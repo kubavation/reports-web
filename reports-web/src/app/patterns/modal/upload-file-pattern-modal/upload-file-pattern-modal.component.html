@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Upload file pattern</h1>
+<div mat-dialog-content class="mat-dialog-content-container">
+  <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
+  <div class="file-upload">
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+            (click)="fileUpload.click()">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-action-container">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="upload()" [disabled]="!fileUploaded">Upload</button>
+</div>

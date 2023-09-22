@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
 import {BehaviorSubject, filter, map, Subject, switchMap, tap} from "rxjs";
 import {Subsystem} from "../shared/modules/model/subsystem";
 import {ReportPatternsService} from "./service/report-patterns.service";
@@ -13,32 +13,36 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./report-patterns.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReportPatternsComponent {
+export class ReportPatternsComponent implements AfterViewInit {
 
   private subsystemSubject = new BehaviorSubject<Subsystem>(null);
 
-  modules$ = this.modulesService.modules$
-    .pipe(
-      tap(modules => this.subsystemSubject.next(modules[0]))
-    );
+  subsystemControl = new FormControl<Subsystem>(null);
+
+  modules$ = this.modulesService.modules$;
 
   reportPatterns$ = this.subsystemSubject.pipe(
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name))
   )
 
-  dataSource$ = this.subsystemSubject.pipe(
+  dataSource$ = this.subsystemControl.valueChanges.pipe(
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),
     map(patterns => new MatTableDataSource<ReportPattern>(patterns))
   )
 
-  subsystemControl = new FormControl<Subsystem>(null);
 
   readonly columns = ['name', 'description', 'subsystem'];
 
   constructor(private reportPatternsService: ReportPatternsService,
               private modulesService: ModulesService) {
   }
+
+  ngAfterViewInit() {
+    this.subsystemControl.markAsTouched();
+
+  }
+
 
 }

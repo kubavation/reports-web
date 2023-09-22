@@ -4,12 +4,14 @@ import {SharedModule} from "../shared/shared.module";
 import {ReportPatternsComponent} from './report-patterns.component';
 import {ReportPatternsRoutingModule} from "./report-patterns-routing.module";
 import { ReportPatternParametersComponent } from './report-pattern-parameters/report-pattern-parameters.component';
+import { UploadFilePatternModalComponent } from './modal/upload-file-pattern-modal/upload-file-pattern-modal.component';
 
 
 @NgModule({
   declarations: [
     ReportPatternsComponent,
-    ReportPatternParametersComponent
+    ReportPatternParametersComponent,
+    UploadFilePatternModalComponent
   ],
   imports: [
     CommonModule,

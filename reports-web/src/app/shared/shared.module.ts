@@ -6,6 +6,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {MatButton, MatButtonModule} from "@angular/material/button";
 
 
 
@@ -17,13 +19,17 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class SharedModule { }

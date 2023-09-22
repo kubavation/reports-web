@@ -1,4 +1,29 @@
-<div *ngIf="modules$ | async"></div>
+<div style="width: 100%" *ngIf="modules$ | async">
 
-<div *ngIf="reportPatterns$ | async">
+
+  <table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
+
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subsystem">
+      <th mat-header-cell *matHeaderCellDef> Subsystem </th>
+      <td mat-cell *matCellDef="let element"> {{element.subsystem}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+
+
+
+
 </div>

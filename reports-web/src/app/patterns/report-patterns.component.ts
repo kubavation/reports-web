@@ -1,8 +1,10 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BehaviorSubject, filter, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, filter, map, Subject, switchMap, tap} from "rxjs";
 import {Subsystem} from "../shared/modules/model/subsystem";
 import {ReportPatternsService} from "./service/report-patterns.service";
 import {ModulesService} from "../shared/modules/service/modules.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {ReportPattern} from "./model/report-pattern";
 
 @Component({
   selector: 'app-report-patterns',
@@ -23,6 +25,14 @@ export class ReportPatternsComponent {
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name))
   )
+
+  dataSource$ = this.subsystemSubject.pipe(
+    filter(subsystem => !!subsystem),
+    switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),
+    map(patterns => new MatTableDataSource<ReportPattern>(patterns))
+  )
+
+  readonly columns = ['name', 'description', 'subsystem'];
 
   constructor(private reportPatternsService: ReportPatternsService,
               private modulesService: ModulesService) {

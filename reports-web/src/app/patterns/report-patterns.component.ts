@@ -16,6 +16,7 @@ import {FormControl} from "@angular/forms";
 export class ReportPatternsComponent implements AfterViewInit {
 
   private subsystemSubject = new BehaviorSubject<Subsystem>(null);
+  private selectedPatternSubject = new BehaviorSubject<ReportPattern>(null);
 
   subsystemControl = new FormControl<Subsystem>(null);
 
@@ -41,8 +42,14 @@ export class ReportPatternsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.subsystemControl.markAsTouched();
-
   }
 
+  onSelection(pattern: ReportPattern): void {
+    this.selectedPatternSubject.next(pattern);
+  }
+
+  get selected(): ReportPattern {
+    return this.selectedPatternSubject.getValue();
+  }
 
 }

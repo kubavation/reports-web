@@ -12,7 +12,7 @@ export class UploadFilePatternModalComponent{
   constructor(public dialogRef: MatDialogRef<UploadFilePatternModalComponent>) {}
 
 
-  onFileSelected($event: Event) {
+  onFileSelected(file: Event) {
 
   }
 }

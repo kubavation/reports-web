@@ -1,16 +1,29 @@
-<div style="width: 100%">
+<mat-card class="w-100">
+  <mat-card-header class="report-patterns-header">
+    <mat-card-title>Report patterns {{subsystemInfo}}</mat-card-title>
+    <div class="subsystem-select">
+      <mat-form-field>
+        <mat-label>Subsystem</mat-label>
+        <mat-select [formControl]="subsystemControl" required>
+          <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
+            {{subsystem.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="subsystemControl.hasError('required')">First you have to choose subsystem</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
 
-  <mat-form-field>
-    <mat-label>Subsystem</mat-label>
-    <mat-select [formControl]="subsystemControl" required>
-      <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
-        {{subsystem.name}}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="subsystemControl.hasError('required')">First you have to choose subsystem</mat-error>
-  </mat-form-field>
+  <div class="report-patterns-menu">
 
-  <button mat-raised-button (click)="openUploadDialog()">Upload file pattern</button>
+
+    <div class="report-patterns-actions">
+       <button mat-raised-button [disabled]="!subsystemInfo" (click)="openReportPatternDialog()">Create report pattern</button>
+       <button mat-raised-button [disabled]="!selected" (click)="openUploadDialog()">Upload file pattern</button>
+       <button mat-raised-button [disabled]="!fileUploaded" (click)="downloadFilePattern()">Download file pattern</button>
+    </div>
+  </div>
 
   <table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
 
@@ -48,6 +61,5 @@
     </app-report-pattern-parameters>
   </div>
 
-
-
-</div>
+  </mat-card-content>
+</mat-card>

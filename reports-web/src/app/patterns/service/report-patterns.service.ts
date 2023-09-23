@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ReportPattern} from "../model/report-pattern";
 import {environment} from "../../../environments/environment";
@@ -29,4 +29,13 @@ export class ReportPatternsService {
 
     return this.http.patch<void>(`${environment.url}/reports-service/report-patterns/${patternId}/files`, formData);
   }
+
+  public downloadPatternParameters(patternId: number): Observable<HttpResponse<Blob>> {
+    return this.http.get<Blob>(`${environment.url}/reports-service/report-patterns/${patternId}/files`,
+ {
+          observe: 'response',
+          responseType: 'blob' as 'json'
+        });
+  }
+
 }

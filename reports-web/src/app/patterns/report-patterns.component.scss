@@ -1,0 +1,25 @@
+.report-patterns-menu {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.report-patterns-actions {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+}
+
+.report-patterns-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.subsystem-select {
+  margin: 0;
+  padding: 0;
+}

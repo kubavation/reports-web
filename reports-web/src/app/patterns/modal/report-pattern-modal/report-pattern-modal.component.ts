@@ -108,4 +108,7 @@ export class ReportPatternModalComponent {
     return !this.filePattern.valid || !this._file;
   }
 
+  deleteFile(): void {
+    this._file = null;
+  }
 }

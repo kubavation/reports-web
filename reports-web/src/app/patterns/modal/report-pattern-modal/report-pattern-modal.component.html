@@ -27,7 +27,7 @@
               <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
               <div class="file-upload">
 
-                {{fileName || "No file pattern uploaded yet."}}
+                <p>{{fileName || "No file pattern uploaded yet."}} <mat-icon *ngIf="fileName" (click)="deleteFile()">delete</mat-icon></p>
 
                 <button mat-mini-fab color="primary" class="upload-btn"
                         (click)="fileUpload.click()">
@@ -57,14 +57,16 @@
                         </mat-form-field>
 
                         <div>
-                          <button mat-raised-button (click)="deleteParameter(i)"><mat-icon>delete</mat-icon></button>
+                          <mat-icon (click)="deleteParameter(i)">delete</mat-icon>
                         </div>
                       </div>
                     </div>
                 </ng-container>
 
               </ng-container>
-              <button mat-raised-button (click)="addParameter()"><mat-icon>add_box</mat-icon> Parameter</button>
+              <div (click)="addParameter()">
+                <mat-icon>add_box</mat-icon> Parameter
+              </div>
             </div>
       </div>
     </mat-step>

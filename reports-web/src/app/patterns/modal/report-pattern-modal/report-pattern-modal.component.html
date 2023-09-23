@@ -17,15 +17,48 @@
       </mat-form-field>
     </div>
 
-    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
-    <div class="file-upload">
 
-      {{fileName || "No file pattern uploaded yet."}}
+    <div style="margin-top: 2%; margin-bottom: 3%;">
+      <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
+      <div class="file-upload">
 
-      <button mat-mini-fab color="primary" class="upload-btn"
-              (click)="fileUpload.click()">
-        <mat-icon>attach_file</mat-icon>
-      </button>
+        {{fileName || "No file pattern uploaded yet."}}
+
+        <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <p>Parameters    <button mat-raised-button (click)="addParameter()">Add Parameter</button></p>
+      <ng-container formArrayName="parameters">
+        <ng-container *ngFor="let paramForm of parameters.controls; let i = index">
+            <div [formGroupName]="i">
+              <div class="params-container">
+                <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" class="w-100">
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Type</mat-label>
+                  <mat-select formControlName="type" required>
+                    <mat-option *ngFor="let type of parameterTypes" [value]="type">
+                      {{type}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <div>
+                  <button mat-raised-button (click)="deleteParameter(i)">Delete</button>
+                </div>
+              </div>
+            </div>
+        </ng-container>
+
+      </ng-container>
     </div>
 
 

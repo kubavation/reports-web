@@ -1,3 +1,10 @@
 .file-input {
   display: none;
 }
+
+.params-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+}

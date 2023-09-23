@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
-import {BehaviorSubject, combineLatest, filter, map, of, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, combineLatest, filter, map, of, switchMap, tap} from "rxjs";
 import {Subsystem} from "../shared/modules/model/subsystem";
 import {ReportPatternsService} from "./service/report-patterns.service";
 import {ModulesService} from "../shared/modules/service/modules.service";
@@ -9,9 +9,10 @@ import {FormControl} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {UploadFilePatternModalComponent} from "./modal/upload-file-pattern-modal/upload-file-pattern-modal.component";
 import {saveAs} from "file-saver";
-import {findUp} from "@angular/cli/src/utilities/find-up";
 import {FileUtil} from "../shared/util/file-util";
 import {ReportPatternModalComponent} from "./modal/report-pattern-modal/report-pattern-modal.component";
+import {FormResponse} from "./modal/report-pattern-modal/form-response";
+import {AddReportPattern} from "./model/add-report-pattern";
 
 @Component({
   selector: 'app-report-patterns',
@@ -21,7 +22,6 @@ import {ReportPatternModalComponent} from "./modal/report-pattern-modal/report-p
 })
 export class ReportPatternsComponent implements AfterViewInit {
 
-  private subsystemSubject = new BehaviorSubject<Subsystem>(null);
   private selectedPatternSubject = new BehaviorSubject<ReportPattern>(null);
   private refreshSubject = new BehaviorSubject<void>(null);
 
@@ -69,8 +69,11 @@ export class ReportPatternsComponent implements AfterViewInit {
       height: '40%'
     }).afterClosed()
       .pipe(
-
-      ).subscribe(res => console.log(res));
+        map((response: FormResponse) => ({pattern: this.requestFrom(response), file: response.file})),
+        switchMap(({pattern, file}) => this.reportPatternsService.addReportPattern(pattern, file))
+      ).subscribe(res => {
+        this.refreshSubject.next();
+    });
   }
 
   openUploadDialog(): void   {
@@ -100,6 +103,15 @@ export class ReportPatternsComponent implements AfterViewInit {
 
   get subsystemInfo(): string {
     return this.subsystemControl?.value ?  ` ${this.subsystemControl.value.name}` : '';
+  }
+
+  private requestFrom(response: FormResponse): AddReportPattern {
+    return {
+      name: response.name,
+      description: response.description,
+      subsystem: this.subsystemControl.value?.name,
+      parameters: response.parameters
+    }
   }
 
 }

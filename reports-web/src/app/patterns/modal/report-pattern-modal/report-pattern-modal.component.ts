@@ -60,12 +60,12 @@ export class ReportPatternModalComponent {
     this.parameters.push(parameterFormGroup);
   }
 
+  deleteParameter(index: number): void {
+    this.parameters.removeAt(index);
+  }
+
   get parameters(): FormArray {
     return this.form.get('parameters') as FormArray;
   }
 
-
-  deleteParameter(index: number) {
-    this.parameters.removeAt(index);
-  }
 }

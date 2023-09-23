@@ -1,8 +1,9 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormResponse} from "./form-response";
 import {ParameterType} from "../../model/parameter-type";
+import {MatStepper} from "@angular/material/stepper";
 
 @Component({
   selector: 'app-report-pattern-modal',
@@ -11,6 +12,8 @@ import {ParameterType} from "../../model/parameter-type";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReportPatternModalComponent {
+
+  @ViewChild('stepper') _stepper: MatStepper;
 
   _form = this.fb.group({
     basicData: this.fb.group({
@@ -31,6 +34,11 @@ export class ReportPatternModalComponent {
 
 
   save(): void {
+
+    if (this.selectedIndex === 0) {
+      this._stepper.next();
+      return;
+    }
 
     const response: FormResponse = {
       name: this.basicData.get('name').value,
@@ -77,4 +85,18 @@ export class ReportPatternModalComponent {
     return this._form.get('filePattern') as FormGroup;
   }
 
+  get buttonMsg(): string {
+    if (this.selectedIndex === 0) {
+      return 'Next';
+    }
+    return 'Save';
+  }
+
+  get selectedIndex(): number {
+    return this._stepper?.selectedIndex ?? 0;
+  }
+
+  back() {
+    this._stepper?.previous();
+  }
 }

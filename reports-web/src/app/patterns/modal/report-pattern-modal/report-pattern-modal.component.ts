@@ -35,7 +35,7 @@ export class ReportPatternModalComponent {
       name: this.form.get('name').value,
       description: this.form.get('description').value,
       file: this._file,
-      parameters: this.parameters.controls.map(control => ({name: control.value.name, type: control.value.description}))
+      parameters: this.parameters.controls.map(control => ({name: control.value.name, type: control.value.type}))
     };
 
     this.dialogRef.close(response);

@@ -11,6 +11,7 @@ import {UploadFilePatternModalComponent} from "./modal/upload-file-pattern-modal
 import {saveAs} from "file-saver";
 import {findUp} from "@angular/cli/src/utilities/find-up";
 import {FileUtil} from "../shared/util/file-util";
+import {ReportPatternModalComponent} from "./modal/report-pattern-modal/report-pattern-modal.component";
 
 @Component({
   selector: 'app-report-patterns',
@@ -59,6 +60,17 @@ export class ReportPatternsComponent implements AfterViewInit {
 
   get selected(): ReportPattern {
     return this.selectedPatternSubject.getValue();
+  }
+
+
+  openReportPatternDialog(): void {
+    this._dialog.open(ReportPatternModalComponent, {
+      width: '50%',
+      height: '40%'
+    }).afterClosed()
+      .pipe(
+
+      ).subscribe(res => console.log(res));
   }
 
   openUploadDialog(): void   {

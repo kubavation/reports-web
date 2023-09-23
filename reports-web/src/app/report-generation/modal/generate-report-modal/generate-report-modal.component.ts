@@ -34,7 +34,7 @@ export class GenerateReportModalComponent {
     .pipe(
       filter(pattern => !!pattern),
       switchMap((pattern: ReportPattern) => this.reportPatternsService.reportPatternParameters(pattern.id)),
-      tap(parameters => parameters.forEach(parameter => this.pushParameter(parameter)))
+      tap(parameters => this.pushParameters(parameters))
     )
 
 
@@ -54,7 +54,12 @@ export class GenerateReportModalComponent {
     return this.form.get('parameters') as FormArray;
   }
 
-  pushParameter(parameter: ReportPatternParameter): void {
+  private pushParameters(parameters: ReportPatternParameter[]): void {
+    this.parameters.clear();
+    parameters.forEach(parameter => this.pushParameter(parameter));
+  }
+
+  private pushParameter(parameter: ReportPatternParameter): void {
 
     const parameterFormGroup = this.fb.group({
       name: [{value: parameter.name, disabled: true}, Validators.required],

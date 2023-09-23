@@ -12,6 +12,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {MatStepperModule} from "@angular/material/stepper";
     MatCardModule,
     MatProgressBarModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports: [
     MatTableModule,
@@ -42,7 +46,9 @@ import {MatStepperModule} from "@angular/material/stepper";
     MatCardModule,
     MatProgressBarModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class SharedModule { }

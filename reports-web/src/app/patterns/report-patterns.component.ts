@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {BehaviorSubject, combineLatest, filter, map, of, switchMap, tap} from "rxjs";
 import {Subsystem} from "../shared/modules/model/subsystem";
 import {ReportPatternsService} from "./service/report-patterns.service";
@@ -13,6 +13,8 @@ import {FileUtil} from "../shared/util/file-util";
 import {ReportPatternModalComponent} from "./modal/report-pattern-modal/report-pattern-modal.component";
 import {FormResponse} from "./modal/report-pattern-modal/form-response";
 import {AddReportPattern} from "./model/add-report-pattern";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-report-patterns',
@@ -21,6 +23,9 @@ import {AddReportPattern} from "./model/add-report-pattern";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReportPatternsComponent implements AfterViewInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   private selectedPatternSubject = new BehaviorSubject<ReportPattern>(null);
   private refreshSubject = new BehaviorSubject<void>(null);
@@ -38,7 +43,12 @@ export class ReportPatternsComponent implements AfterViewInit {
     map(([subsystem, _]) => subsystem),
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),
-    map(patterns => new MatTableDataSource<ReportPattern>(patterns)),
+    map(patterns => {
+      const dataSource = new MatTableDataSource<ReportPattern>(patterns);
+      dataSource.paginator = this.paginator;
+      dataSource.sort = this.sort;
+      return dataSource;
+    }),
     tap(_ => this.selectedPatternSubject.next(null))
   )
 

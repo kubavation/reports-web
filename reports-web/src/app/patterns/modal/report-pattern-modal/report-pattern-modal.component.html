@@ -1,71 +1,91 @@
 <h1 mat-dialog-title>Create report pattern</h1>
 <div mat-dialog-content class="mat-dialog-content-container">
 
-  <div [formGroup]="form" class="w-100">
+  <mat-stepper #stepper [linear]="false">
+    <mat-step [stepControl]="basicData">
+      <div [formGroup]="basicData">
+        <ng-template matStepLabel>Basic data</ng-template>
+            <div>
+              <mat-form-field class="w-60">
+                <mat-label>Pattern name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+            </div>
 
-    <div>
-      <mat-form-field>
-        <mat-label>Pattern name</mat-label>
-        <input matInput formControlName="name" class="w-100">
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field class="w-100">
-        <mat-label>Pattern description</mat-label>
-        <input matInput formControlName="description" >
-      </mat-form-field>
-    </div>
-
-
-    <div style="margin-top: 2%; margin-bottom: 3%;">
-      <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
-      <div class="file-upload">
-
-        {{fileName || "No file pattern uploaded yet."}}
-
-        <button mat-mini-fab color="primary" class="upload-btn"
-                (click)="fileUpload.click()">
-          <mat-icon>attach_file</mat-icon>
-        </button>
+            <div>
+              <mat-form-field class="w-80">
+                <mat-label>Pattern description</mat-label>
+                <textarea matInput
+                          formControlName="description"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="5">
+                </textarea>
+              </mat-form-field>
+            </div>
       </div>
-    </div>
+    </mat-step>
+    <mat-step [stepControl]="filePattern">
+      <div [formGroup]="filePattern">
+        <ng-template matStepLabel>Template</ng-template>
+            <div style="margin-top: 2%; margin-bottom: 3%;">
+              <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
+              <div class="file-upload">
 
-    <div>
-      <p>Parameters    <button mat-raised-button (click)="addParameter()">Add Parameter</button></p>
-      <ng-container formArrayName="parameters">
-        <ng-container *ngFor="let paramForm of parameters.controls; let i = index">
-            <div [formGroupName]="i">
-              <div class="params-container">
-                <mat-form-field>
-                  <mat-label>Name</mat-label>
-                  <input matInput formControlName="name" class="w-100">
-                </mat-form-field>
+                <p>{{fileName || "No file pattern uploaded yet."}}
+                  <mat-icon class="icon-container" *ngIf="fileName"
+                            (click)="deleteFile()">delete
+                  </mat-icon>
+                </p>
 
-                <mat-form-field>
-                  <mat-label>Type</mat-label>
-                  <mat-select formControlName="type" required>
-                    <mat-option *ngFor="let type of parameterTypes" [value]="type">
-                      {{type}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <div>
-                  <button mat-raised-button (click)="deleteParameter(i)">Delete</button>
-                </div>
+                <button mat-mini-fab color="primary" class="upload-btn"
+                        (click)="fileUpload.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
               </div>
             </div>
-        </ng-container>
 
-      </ng-container>
-    </div>
+            <div>
+              <p>Parameters</p>
+              <ng-container formArrayName="parameters">
+                <ng-container *ngFor="let paramForm of parameters.controls; let i = index">
+                    <div [formGroupName]="i">
+                      <div class="params-container">
+                        <mat-form-field>
+                          <mat-label>Name</mat-label>
+                          <input matInput formControlName="name" class="w-100">
+                        </mat-form-field>
 
+                        <mat-form-field>
+                          <mat-label>Type</mat-label>
+                          <mat-select formControlName="type" required>
+                            <mat-option *ngFor="let type of parameterTypes" [value]="type">
+                              {{type}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
 
-  </div>
+                        <div class="icon-container">
+                          <mat-icon (click)="deleteParameter(i)">delete</mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                </ng-container>
+
+              </ng-container>
+              <div class="icon-container" (click)="addParameter()">
+                <mat-icon>add_box</mat-icon> Parameter
+              </div>
+            </div>
+      </div>
+    </mat-step>
+
+  </mat-stepper>
 
 </div>
 <div mat-dialog-actions class="dialog-action-container">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial [disabled]="!form.valid" (click)="save()" >Save</button>
+  <button mat-button *ngIf="selectedIndex != 0" (click)="back()">Back</button>
+  <button mat-button cdkFocusInitial [disabled]="matStepDisabled" (click)="save()" >{{buttonMsg}}</button>
 </div>

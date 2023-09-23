@@ -2,9 +2,20 @@
   display: none;
 }
 
+.file-upload {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
 .params-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 20px;
+  justify-items: center;
+}
+
+.icon-container:hover {
+  cursor: pointer;
 }

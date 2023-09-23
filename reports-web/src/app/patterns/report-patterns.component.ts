@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
-import {BehaviorSubject, filter, map, Subject, switchMap, tap} from "rxjs";
+import {BehaviorSubject, combineLatest, filter, map, of, Subject, switchMap, tap} from "rxjs";
 import {Subsystem} from "../shared/modules/model/subsystem";
 import {ReportPatternsService} from "./service/report-patterns.service";
 import {ModulesService} from "../shared/modules/service/modules.service";
@@ -19,23 +19,19 @@ export class ReportPatternsComponent implements AfterViewInit {
 
   private subsystemSubject = new BehaviorSubject<Subsystem>(null);
   private selectedPatternSubject = new BehaviorSubject<ReportPattern>(null);
+  private refreshSubject = new BehaviorSubject<void>(null);
 
   subsystemControl = new FormControl<Subsystem>(null);
 
   modules$ = this.modulesService.modules$;
 
-  reportPatterns$ = this.subsystemSubject.pipe(
-    filter(subsystem => !!subsystem),
-    switchMap(({name}) => this.reportPatternsService.reportPatterns(name))
-  )
-
   reportPatternParameters$ = this.selectedPatternSubject
     .pipe(
-      filter(pattern => !!pattern),
-      switchMap(({id}) => this.reportPatternsService.reportPatternParameters(id))
+      switchMap((pattern) => pattern ? this.reportPatternsService.reportPatternParameters(pattern.id): of([]))
     )
 
-  dataSource$ = this.subsystemControl.valueChanges.pipe(
+  dataSource$ = combineLatest([this.subsystemControl.valueChanges, this.refreshSubject]).pipe(
+    map(([subsystem, _]) => subsystem),
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),
     map(patterns => new MatTableDataSource<ReportPattern>(patterns))
@@ -69,6 +65,8 @@ export class ReportPatternsComponent implements AfterViewInit {
       .pipe(
         switchMap(file => this.reportPatternsService.uploadPatternFile(this.selectedPatternSubject.value?.id, file))
       )
-      .subscribe();
+      .subscribe(res => {
+        this.refreshSubject.next();
+      });
   }
 }

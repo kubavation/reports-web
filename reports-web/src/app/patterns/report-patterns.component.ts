@@ -8,6 +8,9 @@ import {ReportPattern} from "./model/report-pattern";
 import {FormControl} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {UploadFilePatternModalComponent} from "./modal/upload-file-pattern-modal/upload-file-pattern-modal.component";
+import {saveAs} from "file-saver";
+import {findUp} from "@angular/cli/src/utilities/find-up";
+import {FileUtil} from "../shared/util/file-util";
 
 @Component({
   selector: 'app-report-patterns',
@@ -73,6 +76,9 @@ export class ReportPatternsComponent implements AfterViewInit {
   }
 
   downloadFilePattern(): void {
-    console.log('todo');
+    this.reportPatternsService.downloadPatternParameters(this.selectedPatternSubject.value?.id)
+      .subscribe(response => {
+        saveAs(response.body, FileUtil.fileNameFromHeader(response));
+      })
   }
 }

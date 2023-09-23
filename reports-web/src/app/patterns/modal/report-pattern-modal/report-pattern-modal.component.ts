@@ -1,10 +1,8 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {FormArray, FormBuilder, Validators} from "@angular/forms";
-import {AddReportPattern} from "../../model/add-report-pattern";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormResponse} from "./form-response";
 import {ParameterType} from "../../model/parameter-type";
-import {ReportPatternParameter} from "../../model/report-pattern-parameter";
 
 @Component({
   selector: 'app-report-pattern-modal',
@@ -14,12 +12,15 @@ import {ReportPatternParameter} from "../../model/report-pattern-parameter";
 })
 export class ReportPatternModalComponent {
 
-  form = this.fb.group({
-    name: [null, [Validators.required]],
-    description: [null, [Validators.required]],
-    parameters: this.fb.array([])
+  _form = this.fb.group({
+    basicData: this.fb.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]]
+    }),
+    filePattern: this.fb.group({
+      parameters: this.fb.array([])
+    })
   })
-
   private _file: File;
   readonly requiredType = '.jrxml';
 
@@ -32,8 +33,8 @@ export class ReportPatternModalComponent {
   save(): void {
 
     const response: FormResponse = {
-      name: this.form.get('name').value,
-      description: this.form.get('description').value,
+      name: this.basicData.get('name').value,
+      description: this.basicData.get('description').value,
       file: this._file,
       parameters: this.parameters.controls.map(control => ({name: control.value.name, type: control.value.type}))
     };
@@ -65,7 +66,15 @@ export class ReportPatternModalComponent {
   }
 
   get parameters(): FormArray {
-    return this.form.get('parameters') as FormArray;
+    return this.filePattern.get('parameters') as FormArray;
+  }
+
+  get basicData(): FormGroup {
+    return this._form.get('basicData') as FormGroup;
+  }
+
+  get filePattern(): FormGroup {
+    return this._form.get('filePattern') as FormGroup;
   }
 
 }

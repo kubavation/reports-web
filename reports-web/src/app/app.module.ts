@@ -7,18 +7,20 @@ import {HttpClientModule} from "@angular/common/http";
 import {initializeKeycloak} from "./keycloak/init/keycloak-init.factory";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    KeycloakAngularModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        KeycloakAngularModule,
+        SharedModule
+    ],
   providers: [
     {
       provide: APP_INITIALIZER,

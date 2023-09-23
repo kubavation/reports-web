@@ -14,6 +14,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import {MatSortModule} from "@angular/material/sort";
     MatInputModule,
     MatStepperModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatTableModule,
@@ -48,7 +52,9 @@ import {MatSortModule} from "@angular/material/sort";
     MatInputModule,
     MatStepperModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class SharedModule { }

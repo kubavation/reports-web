@@ -70,4 +70,8 @@ export class ReportPatternsComponent implements AfterViewInit {
         this.refreshSubject.next();
       });
   }
+
+  downloadFilePattern(): void {
+    console.log('todo');
+  }
 }

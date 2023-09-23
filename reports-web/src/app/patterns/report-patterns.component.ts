@@ -63,9 +63,10 @@ export class ReportPatternsComponent implements AfterViewInit {
       height: '40%'
     }).afterClosed()
       .pipe(
+        filter(result => !!result),
         switchMap(file => this.reportPatternsService.uploadPatternFile(this.selectedPatternSubject.value?.id, file))
       )
-      .subscribe(res => {
+      .subscribe(_ => {
         this.refreshSubject.next();
       });
   }

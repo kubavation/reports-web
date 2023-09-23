@@ -41,7 +41,7 @@
             </div>
 
             <div>
-              <p>Parameters <button mat-raised-button (click)="addParameter()">Add Parameter</button></p>
+              <p>Parameters </p>
               <ng-container formArrayName="parameters">
                 <ng-container *ngFor="let paramForm of parameters.controls; let i = index">
                     <div [formGroupName]="i">
@@ -61,13 +61,14 @@
                         </mat-form-field>
 
                         <div>
-                          <button mat-raised-button (click)="deleteParameter(i)">Delete</button>
+                          <button mat-raised-button (click)="deleteParameter(i)"><mat-icon>delete</mat-icon></button>
                         </div>
                       </div>
                     </div>
                 </ng-container>
 
               </ng-container>
+              <button mat-raised-button (click)="addParameter()"><mat-icon>add_box</mat-icon> Parameter</button>
             </div>
         <div>
           <button mat-button matStepperPrevious>Back</button>

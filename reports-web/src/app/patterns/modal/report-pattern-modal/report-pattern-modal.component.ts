@@ -24,6 +24,7 @@ export class ReportPatternModalComponent {
       parameters: this.fb.array([])
     })
   })
+
   private _file: File;
   readonly requiredType = '.jrxml';
 
@@ -96,7 +97,15 @@ export class ReportPatternModalComponent {
     return this._stepper?.selectedIndex ?? 0;
   }
 
-  back() {
+  back(): void {
     this._stepper?.previous();
   }
+
+  get matStepDisabled(): boolean {
+    if (this.selectedIndex == 0) {
+      return !this.basicData.valid;
+    }
+    return !this.filePattern.valid || !this._file;
+  }
+
 }

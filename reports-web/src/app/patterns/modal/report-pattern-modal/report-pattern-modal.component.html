@@ -20,7 +20,7 @@
             </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="filePattern" [optional]="true">
+    <mat-step [stepControl]="filePattern">
       <div [formGroup]="filePattern">
         <ng-template matStepLabel>Template</ng-template>
             <div style="margin-top: 2%; margin-bottom: 3%;">
@@ -37,7 +37,7 @@
             </div>
 
             <div>
-              <p>Parameters </p>
+              <p>Parameters</p>
               <ng-container formArrayName="parameters">
                 <ng-container *ngFor="let paramForm of parameters.controls; let i = index">
                     <div [formGroupName]="i">
@@ -75,5 +75,5 @@
 <div mat-dialog-actions class="dialog-action-container">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button *ngIf="selectedIndex != 0" (click)="back()">Back</button>
-  <button mat-button cdkFocusInitial [disabled]="!_form.valid" (click)="save()" >{{buttonMsg}}</button>
+  <button mat-button cdkFocusInitial [disabled]="matStepDisabled" (click)="save()" >{{buttonMsg}}</button>
 </div>

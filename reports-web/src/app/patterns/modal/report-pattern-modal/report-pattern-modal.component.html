@@ -5,17 +5,23 @@
     <mat-step [stepControl]="basicData">
       <div [formGroup]="basicData">
         <ng-template matStepLabel>Basic data</ng-template>
-        <div>
-              <mat-form-field>
+            <div>
+              <mat-form-field class="w-60">
                 <mat-label>Pattern name</mat-label>
-                <input matInput formControlName="name" class="w-100">
+                <input matInput formControlName="name">
               </mat-form-field>
             </div>
 
             <div>
-              <mat-form-field class="w-100">
+              <mat-form-field class="w-80">
                 <mat-label>Pattern description</mat-label>
-                <input matInput formControlName="description" >
+                <textarea matInput
+                          formControlName="description"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="5">
+                </textarea>
               </mat-form-field>
             </div>
       </div>
@@ -27,7 +33,11 @@
               <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload [accept]="requiredType" />
               <div class="file-upload">
 
-                <p>{{fileName || "No file pattern uploaded yet."}} <mat-icon class="icon-container" *ngIf="fileName" (click)="deleteFile()">delete</mat-icon></p>
+                <p>{{fileName || "No file pattern uploaded yet."}}
+                  <mat-icon class="icon-container" *ngIf="fileName"
+                            (click)="deleteFile()">delete
+                  </mat-icon>
+                </p>
 
                 <button mat-mini-fab color="primary" class="upload-btn"
                         (click)="fileUpload.click()">

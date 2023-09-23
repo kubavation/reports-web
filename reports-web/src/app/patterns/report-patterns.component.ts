@@ -81,4 +81,9 @@ export class ReportPatternsComponent implements AfterViewInit {
         saveAs(response.body, FileUtil.fileNameFromHeader(response));
       })
   }
+
+  get fileUploaded(): boolean {
+    return !!this.selectedPatternSubject.value?.fileName;
+  }
+
 }

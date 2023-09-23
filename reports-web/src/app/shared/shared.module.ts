@@ -10,6 +10,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatInputModule
   ],
   exports: [
     MatTableModule,
@@ -36,7 +38,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatInputModule
   ]
 })
 export class SharedModule { }

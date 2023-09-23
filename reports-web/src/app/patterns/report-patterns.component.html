@@ -12,8 +12,8 @@
     </mat-form-field>
 
     <div class="report-patterns-actions">
-       <button mat-raised-button (click)="openUploadDialog()">Upload file pattern</button>
-       <button mat-raised-button (click)="downloadFilePattern()">Download file pattern</button>
+       <button mat-raised-button [disabled]="!selected" (click)="openUploadDialog()">Upload file pattern</button>
+       <button mat-raised-button [disabled]="!selected" (click)="downloadFilePattern()">Download file pattern</button>
     </div>
   </div>
 

@@ -34,7 +34,8 @@ export class ReportPatternsComponent implements AfterViewInit {
     map(([subsystem, _]) => subsystem),
     filter(subsystem => !!subsystem),
     switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),
-    map(patterns => new MatTableDataSource<ReportPattern>(patterns))
+    map(patterns => new MatTableDataSource<ReportPattern>(patterns)),
+    tap(_ => this.selectedPatternSubject.next(null))
   )
 
 

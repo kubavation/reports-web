@@ -7,6 +7,7 @@ import {ReportPatternsService} from "../../../patterns/service/report-patterns.s
 import {Subsystem} from "../../../shared/modules/model/subsystem";
 import {ReportPattern} from "../../../patterns/model/report-pattern";
 import {ReportPatternParameter} from "../../../patterns/model/report-pattern-parameter";
+import {ParameterType} from "../../../patterns/model/parameter-type";
 
 @Component({
   selector: 'app-generate-report-modal',
@@ -37,6 +38,7 @@ export class GenerateReportModalComponent {
       tap(parameters => this.pushParameters(parameters))
     )
 
+  readonly parameterType = ParameterType;
 
   constructor(public dialogRef: MatDialogRef<GenerateReportModalComponent>,
               private fb: FormBuilder,
@@ -62,12 +64,16 @@ export class GenerateReportModalComponent {
   private pushParameter(parameter: ReportPatternParameter): void {
 
     const parameterFormGroup = this.fb.group({
-      name: [{value: parameter.name, disabled: true}, Validators.required],
+      name: [parameter.name, Validators.required],
+      type: [parameter.type],
       value: [null, Validators.required]
     })
 
     this.parameters.push(parameterFormGroup);
   }
 
+  getParam(index: number): any {
+    return this.parameters.at(index).value;
+  }
 
 }

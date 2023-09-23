@@ -53,6 +53,12 @@
         (click)="onSelection(row)"
         [class.row-selected]="selected === row"
         *matRowDef="let row; columns: columns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="columns.length">
+        No data found.
+      </td>
+    </tr>
   </table>
 
   <div style="margin-top: 5%">

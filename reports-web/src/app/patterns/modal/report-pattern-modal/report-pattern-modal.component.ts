@@ -65,5 +65,7 @@ export class ReportPatternModalComponent {
   }
 
 
-
+  deleteParameter(index: number) {
+    this.parameters.removeAt(index);
+  }
 }

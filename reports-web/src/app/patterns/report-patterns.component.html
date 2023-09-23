@@ -1,19 +1,22 @@
 <mat-card class="w-100">
-  <mat-card-header class="margin: 2%">
+  <mat-card-header class="report-patterns-header">
     <mat-card-title>Report patterns</mat-card-title>
+    <div class="subsystem-select">
+      <mat-form-field>
+        <mat-label>Subsystem</mat-label>
+        <mat-select [formControl]="subsystemControl" required>
+          <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
+            {{subsystem.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="subsystemControl.hasError('required')">First you have to choose subsystem</mat-error>
+      </mat-form-field>
+    </div>
   </mat-card-header>
   <mat-card-content>
 
   <div class="report-patterns-menu">
-    <mat-form-field>
-      <mat-label>Subsystem</mat-label>
-      <mat-select [formControl]="subsystemControl" required>
-        <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
-          {{subsystem.name}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="subsystemControl.hasError('required')">First you have to choose subsystem</mat-error>
-    </mat-form-field>
+
 
     <div class="report-patterns-actions">
        <button mat-raised-button [disabled]="!selected" (click)="openUploadDialog()">Upload file pattern</button>

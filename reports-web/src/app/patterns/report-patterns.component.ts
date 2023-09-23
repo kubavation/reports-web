@@ -86,4 +86,8 @@ export class ReportPatternsComponent implements AfterViewInit {
     return !!this.selectedPatternSubject.value?.fileName;
   }
 
+  get subsystemInfo(): string {
+    return this.subsystemControl?.value ?  ` ${this.subsystemControl.value.name}` : '';
+  }
+
 }

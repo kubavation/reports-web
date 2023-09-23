@@ -9,7 +9,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class UploadFilePatternModalComponent {
 
-  private _file: any;
+  private _file: File;
 
   readonly requiredType = '.jrxml';
 
@@ -28,4 +28,9 @@ export class UploadFilePatternModalComponent {
   get fileUploaded(): boolean {
     return this._file != null;
   }
+
+  get fileName(): string {
+    return this._file?.name ?? null;
+  }
+
 }

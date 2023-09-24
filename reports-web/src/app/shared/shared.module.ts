@@ -16,10 +16,15 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
+
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PdfViewerComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -37,7 +42,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatPaginatorModule,
     MatSortModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxExtendedPdfViewerModule
   ],
   exports: [
     MatTableModule,
@@ -54,7 +60,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatPaginatorModule,
     MatSortModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxExtendedPdfViewerModule
   ]
 })
 export class SharedModule { }

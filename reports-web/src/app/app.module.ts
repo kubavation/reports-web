@@ -8,6 +8,7 @@ import {initializeKeycloak} from "./keycloak/init/keycloak-init.factory";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SharedModule} from "./shared/shared.module";
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 
 @NgModule({
   declarations: [
@@ -32,3 +33,4 @@ import {SharedModule} from "./shared/shared.module";
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

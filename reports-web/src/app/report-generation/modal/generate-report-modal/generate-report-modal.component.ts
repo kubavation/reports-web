@@ -8,6 +8,7 @@ import {Subsystem} from "../../../shared/modules/model/subsystem";
 import {ReportPattern} from "../../../patterns/model/report-pattern";
 import {ReportPatternParameter} from "../../../patterns/model/report-pattern-parameter";
 import {ParameterType} from "../../../patterns/model/parameter-type";
+import {ReportGeneration} from "../../model/report-generation";
 
 @Component({
   selector: 'app-generate-report-modal',
@@ -49,7 +50,7 @@ export class GenerateReportModalComponent {
 
 
   generate(): void {
-
+    this.dialogRef.close(this.getResponse())
   }
 
   get parameters(): FormArray {
@@ -74,6 +75,15 @@ export class GenerateReportModalComponent {
 
   getParam(index: number): any {
     return this.parameters.at(index).value;
+  }
+
+  getResponse(): ReportGeneration {
+    return {
+      format: 'PDF', //todo
+      reportName: (this.form.get('pattern').value as ReportPattern).name,
+      subsystem: (this.form.get('subsystem').value as Subsystem).name,
+      parameters: this.parameters.value.map(parameter => ({name: parameter.name, value: parameter.value}))
+    }
   }
 
 }

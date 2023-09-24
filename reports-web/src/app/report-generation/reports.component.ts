@@ -1,6 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {GenerateReportModalComponent} from "./modal/generate-report-modal/generate-report-modal.component";
 import {MatDialog} from "@angular/material/dialog";
+import {filter, switchMap} from "rxjs";
+import {ReportGeneration} from "./model/report-generation";
+import {ReportsService} from "./service/reports.service";
+import {saveAs} from "file-saver";
+import {FileUtil} from "../shared/util/file-util";
 
 @Component({
   selector: 'app-reports',
@@ -10,7 +15,8 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class ReportsComponent {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,
+              private reportsService: ReportsService) { }
 
   openGenerationReportModal(): void {
     this.dialog.open(GenerateReportModalComponent, {
@@ -18,7 +24,11 @@ export class ReportsComponent {
       height: '80%'
     }).afterClosed()
       .pipe(
+        filter(response => !!response),
+        switchMap((response: ReportGeneration) => this.reportsService.generate(response))
       )
-      .subscribe(res => console.log(res));
+      .subscribe(response => {
+        saveAs(response.body, FileUtil.fileNameFromHeader(response))
+      });
   }
 }

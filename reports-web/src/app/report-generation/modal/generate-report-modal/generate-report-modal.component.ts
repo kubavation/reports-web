@@ -9,7 +9,6 @@ import {ReportPattern} from "../../../patterns/model/report-pattern";
 import {ReportPatternParameter} from "../../../patterns/model/report-pattern-parameter";
 import {ParameterType} from "../../../patterns/model/parameter-type";
 import {ReportGeneration} from "../../model/report-generation";
-import {ReportGenerationParameter} from "../../model/report-generation-parameter";
 
 @Component({
   selector: 'app-generate-report-modal',

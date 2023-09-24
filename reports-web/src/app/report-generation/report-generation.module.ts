@@ -4,6 +4,7 @@ import {SharedModule} from "../shared/shared.module";
 import {ReportsComponent} from './reports.component';
 import {GenerateReportModalComponent} from "./modal/generate-report-modal/generate-report-modal.component";
 import {ReportGenerationRoutingModule} from "./report-generation-routing.module";
+import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 
 
 @NgModule({
@@ -11,10 +12,11 @@ import {ReportGenerationRoutingModule} from "./report-generation-routing.module"
     ReportsComponent,
     GenerateReportModalComponent
   ],
-  imports: [
-    CommonModule,
-    ReportGenerationRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        ReportGenerationRoutingModule,
+        SharedModule,
+        NgxExtendedPdfViewerModule
+    ]
 })
 export class ReportGenerationModule { }

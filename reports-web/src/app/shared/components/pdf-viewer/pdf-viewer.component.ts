@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FileData} from "../model/file-data";
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -9,11 +10,11 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class PdfViewerComponent {
 
-  blob: Blob;
+  fileData: FileData;
 
   constructor(public dialogRef: MatDialogRef<PdfViewerComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.blob = data.blob;
+    this.fileData = data.fileData;
   }
 
 

@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FileData} from "../model/file-data";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -18,4 +19,7 @@ export class PdfViewerComponent {
   }
 
 
+  download() {
+    this.dialogRef.close(this.fileData);
+  }
 }

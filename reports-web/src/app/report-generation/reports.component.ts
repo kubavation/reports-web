@@ -8,6 +8,7 @@ import {PdfViewerComponent} from "../shared/components/pdf-viewer/pdf-viewer.com
 import {HttpResponse} from "@angular/common/http";
 import {FileData} from "../shared/components/model/file-data";
 import {FileUtil} from "../shared/util/file-util";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-reports',
@@ -33,8 +34,8 @@ export class ReportsComponent {
           fileName: FileUtil.fileNameFromHeader(response)}
         ))
       )
-      .subscribe(response => {
-        //saveAs(response.body, FileUtil.fileNameFromHeader(response))
+      .subscribe((fileData: FileData) => {
+        saveAs(fileData.blob, fileData.fileName);
       });
   }
 
@@ -47,7 +48,10 @@ export class ReportsComponent {
         fileData: fileData
       }
     })
-      .afterClosed();
+      .afterClosed()
+      .pipe(
+        filter(response => !!response)
+      );
   }
 
 }

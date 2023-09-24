@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Upload file pattern</h1>
+<div mat-dialog-content class="mat-dialog-content-container">
+
+  <ngx-extended-pdf-viewer
+    [src]="blob"
+    [height]="'auto'"
+    [useBrowserLocale]="true"
+  >
+  </ngx-extended-pdf-viewer>
+
+
+</div>
+<div mat-dialog-actions class="dialog-action-container">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial>Download</button>
+</div>

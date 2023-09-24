@@ -20,7 +20,6 @@ import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
         BrowserAnimationsModule,
         HttpClientModule,
         KeycloakAngularModule,
-        NgxExtendedPdfViewerModule,
         SharedModule
     ],
   providers: [

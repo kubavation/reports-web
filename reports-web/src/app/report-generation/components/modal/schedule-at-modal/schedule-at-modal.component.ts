@@ -12,7 +12,7 @@ export class ScheduleAtModalComponent{
 
   form = this.fb.group({
     date: [null, Validators.required],
-    time: [null, Validators.required]
+    time: [null, [Validators.required]]
   })
 
 
@@ -22,11 +22,26 @@ export class ScheduleAtModalComponent{
 
 
   save(): void {
-    //this.dialogRef.close(this.form.get('at').value);
+    const date: Date = this.form.get('date').value;
+    date.setHours(this.hour(), this.minute())
+    this.dialogRef.close(date);
   }
 
 
   updateFormDate(event: any) {
     this.form.get('date').setValue(event);
   }
+
+  get minDate(): Date {
+    return new Date();
+  }
+
+  hour(): number {
+    return parseInt((this.form.get('time').value as String).split(':')[0]);
+  }
+
+  minute(): number {
+    return parseInt((this.form.get('time').value as String).split(':')[1]);
+  }
+
 }

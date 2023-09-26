@@ -4,12 +4,14 @@
   <div [formGroup]="form">
         <mat-card class="demo-inline-calendar-card">
           <mat-calendar [selected]="form.get('date').value"
+                        [minDate]="minDate"
                         (selectedChange)="updateFormDate($event)">
           </mat-calendar>
         </mat-card>
 
     <mat-form-field>
-      <input matInput formControlName="time" type="time"/>
+      <mat-label>Time</mat-label>
+      <input matInput formControlName="time" type="time" />
     </mat-form-field>
 
   </div>
@@ -17,5 +19,5 @@
 </div>
 <div mat-dialog-actions class="dialog-action-container">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="save()">Schedule</button>
+  <button mat-button cdkFocusInitial [disabled]="!form.valid" (click)="save()">Schedule</button>
 </div>

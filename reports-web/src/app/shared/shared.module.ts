@@ -18,6 +18,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 
@@ -43,7 +44,8 @@ import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatTableModule,
@@ -61,7 +63,8 @@ import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }

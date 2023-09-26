@@ -5,12 +5,16 @@ import {ReportsComponent} from './reports.component';
 import {GenerateReportModalComponent} from "./modal/generate-report-modal/generate-report-modal.component";
 import {ReportGenerationRoutingModule} from "./report-generation-routing.module";
 import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
+import { ScheduledReportsComponent } from './components/scheduled-reports/scheduled-reports.component';
+import { ScheduleAtModalComponent } from './components/modal/schedule-at-modal/schedule-at-modal.component';
 
 
 @NgModule({
   declarations: [
     ReportsComponent,
-    GenerateReportModalComponent
+    GenerateReportModalComponent,
+    ScheduledReportsComponent,
+    ScheduleAtModalComponent
   ],
     imports: [
         CommonModule,

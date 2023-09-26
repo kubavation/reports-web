@@ -2,19 +2,15 @@
 <div mat-dialog-content class="mat-dialog-content-container">
 
   <div [formGroup]="form">
+        <mat-card class="demo-inline-calendar-card">
+          <mat-calendar [selected]="form.get('date').value"
+                        (selectedChange)="updateFormDate($event)">
+          </mat-calendar>
+        </mat-card>
 
-      <mat-form-field>
-        <mat-label>Schedule at</mat-label>
-        <input formControlName="at" matInput [matDatepicker]="datepicker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-        <mat-datepicker #datepicker>
-          <mat-datepicker-actions>
-            <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-          </mat-datepicker-actions>
-        </mat-datepicker>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="time" type="time"/>
+    </mat-form-field>
 
   </div>
 

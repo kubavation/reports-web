@@ -11,7 +11,8 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class ScheduleAtModalComponent{
 
   form = this.fb.group({
-    at: [null, Validators.required]
+    date: [null, Validators.required],
+    time: [null, Validators.required]
   })
 
 
@@ -21,8 +22,11 @@ export class ScheduleAtModalComponent{
 
 
   save(): void {
-    this.dialogRef.close(this.form.get('at').value);
+    //this.dialogRef.close(this.form.get('at').value);
   }
 
 
+  updateFormDate(event: any) {
+    this.form.get('date').setValue(event);
+  }
 }

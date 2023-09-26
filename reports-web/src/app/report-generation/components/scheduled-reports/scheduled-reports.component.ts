@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {GenerateReportModalComponent} from "../../modal/generate-report-modal/generate-report-modal.component";
-import {filter, map, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, filter, map, Observable, switchMap} from "rxjs";
 import {ReportGeneration} from "../../model/report-generation";
 import {ReportsService} from "../../service/reports.service";
 import {ScheduleReportGeneration} from "../../model/schedule-report-generation";
@@ -17,10 +17,15 @@ import {ScheduledReport} from "./model/scheduled-report";
 })
 export class ScheduledReportsComponent {
 
-  dataSource$ = this.reportsService.scheduled()
-    .pipe(
-      map(reports => new MatTableDataSource<ScheduledReport>(reports))
-    );
+  private refreshSubject = new BehaviorSubject<void>(null);
+
+  dataSource$ = this.refreshSubject.pipe(
+    switchMap(_ => this.reportsService.scheduled()
+      .pipe(
+        map(reports => new MatTableDataSource<ScheduledReport>(reports))
+      )
+    )
+  );
 
 
   readonly columns = ['id', 'name', 'description', 'subsystem', 'fileName', 'status', 'at']
@@ -43,7 +48,7 @@ export class ScheduledReportsComponent {
         switchMap((response: ScheduleReportGeneration) => this.reportsService.schedule(response)),
       )
       .subscribe(_ => {
-        console.log(_)
+        this.refreshSubject.next();
       });
   }
 

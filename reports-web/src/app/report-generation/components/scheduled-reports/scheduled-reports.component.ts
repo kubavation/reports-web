@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'app-scheduled-reports',
   templateUrl: './scheduled-reports.component.html',
-  styleUrls: ['./scheduled-reports.component.scss']
+  styleUrls: ['./scheduled-reports.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScheduledReportsComponent implements OnInit {
+export class ScheduledReportsComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

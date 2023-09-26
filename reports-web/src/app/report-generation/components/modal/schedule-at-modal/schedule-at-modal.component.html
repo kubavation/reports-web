@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Generate</h1>
+<div mat-dialog-content class="mat-dialog-content-container">
+
+  <div [formGroup]="form">
+
+      <mat-form-field>
+        <mat-label>Schedule at</mat-label>
+        <input formControlName="value" matInput [matDatepicker]="datepicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+      </mat-form-field>
+
+  </div>
+
+</div>
+<div mat-dialog-actions class="dialog-action-container">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="save()">Schedule</button>
+</div>

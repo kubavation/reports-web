@@ -6,6 +6,8 @@ import {ReportGeneration} from "../../model/report-generation";
 import {ReportsService} from "../../service/reports.service";
 import {ScheduleReportGeneration} from "../../model/schedule-report-generation";
 import {ScheduleAtModalComponent} from "../modal/schedule-at-modal/schedule-at-modal.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {ScheduledReport} from "./model/scheduled-report";
 
 @Component({
   selector: 'app-scheduled-reports',
@@ -14,6 +16,14 @@ import {ScheduleAtModalComponent} from "../modal/schedule-at-modal/schedule-at-m
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduledReportsComponent {
+
+  dataSource$ = this.reportsService.scheduled()
+    .pipe(
+      map(reports => new MatTableDataSource<ScheduledReport>(reports))
+    );
+
+
+  readonly columns = ['id', 'name', 'description', 'subsystem', 'fileName', 'status', 'at']
 
   constructor(private dialog: MatDialog,
               private reportsService: ReportsService) { }

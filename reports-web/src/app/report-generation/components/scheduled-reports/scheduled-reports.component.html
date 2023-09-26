@@ -3,3 +3,51 @@
 </div>
 
 
+<table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8" matSort>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fileName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> File name </th>
+    <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subsystem">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Subsystem </th>
+    <td mat-cell *matCellDef="let element"> {{element.subsystem}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheduled At </th>
+    <td mat-cell *matCellDef="let element"> {{element.at}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: columns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="columns.length">
+      No data found.
+    </td>
+  </tr>
+</table>

@@ -120,7 +120,8 @@ export class ReportPatternsComponent implements AfterViewInit {
       name: response.name,
       description: response.description,
       subsystem: this.subsystemControl.value?.name,
-      parameters: response.parameters
+      parameters: response.parameters,
+      generationType: response.generationType
     }
   }
 

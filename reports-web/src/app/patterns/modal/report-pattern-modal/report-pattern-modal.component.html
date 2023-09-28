@@ -24,6 +24,18 @@
                 </textarea>
               </mat-form-field>
             </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Generation type</mat-label>
+                <mat-select formControlName="generationType" required>
+                  <mat-option *ngFor="let generationType of generationTypes" [value]="generationType">
+                    {{generationType}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
       </div>
     </mat-step>
     <mat-step [stepControl]="filePattern">

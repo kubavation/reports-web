@@ -4,6 +4,7 @@ import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@a
 import {FormResponse} from "./form-response";
 import {ParameterType} from "../../model/parameter-type";
 import {MatStepper} from "@angular/material/stepper";
+import {GenerationType} from "../../model/generation-type";
 
 @Component({
   selector: 'app-report-pattern-modal',
@@ -15,10 +16,13 @@ export class ReportPatternModalComponent {
 
   @ViewChild('stepper') _stepper: MatStepper;
 
+  generationTypes = Object.keys(GenerationType);
+
   _form = this.fb.group({
     basicData: this.fb.group({
       name: [null, [Validators.required]],
-      description: [null, [Validators.required]]
+      description: [null, [Validators.required]],
+      generationType: [null, Validators.required]
     }),
     filePattern: this.fb.group({
       parameters: this.fb.array([])
@@ -44,6 +48,7 @@ export class ReportPatternModalComponent {
     const response: FormResponse = {
       name: this.basicData.get('name').value,
       description: this.basicData.get('description').value,
+      generationType: this.basicData.get('generationType').value,
       file: this._file,
       parameters: this.parameters.controls.map(control => ({name: control.value.name, type: control.value.type}))
     };

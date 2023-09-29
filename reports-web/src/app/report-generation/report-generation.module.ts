@@ -7,6 +7,8 @@ import {ReportGenerationRoutingModule} from "./report-generation-routing.module"
 import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import { ScheduledReportsComponent } from './components/scheduled-reports/scheduled-reports.component';
 import { ScheduleAtModalComponent } from './components/modal/schedule-at-modal/schedule-at-modal.component';
+import { ScheduledReportStatusComponent } from './components/scheduled-reports/scheduled-report-status/scheduled-report-status.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
@@ -14,13 +16,14 @@ import { ScheduleAtModalComponent } from './components/modal/schedule-at-modal/s
     ReportsComponent,
     GenerateReportModalComponent,
     ScheduledReportsComponent,
-    ScheduleAtModalComponent
+    ScheduleAtModalComponent,
+    ScheduledReportStatusComponent
   ],
     imports: [
-        CommonModule,
-        ReportGenerationRoutingModule,
-        SharedModule,
-        NgxExtendedPdfViewerModule
+      CommonModule,
+      ReportGenerationRoutingModule,
+      SharedModule,
+      NgxExtendedPdfViewerModule
     ]
 })
 export class ReportGenerationModule { }

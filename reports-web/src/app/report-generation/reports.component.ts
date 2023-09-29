@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
 import {GenerateReportModalComponent} from "./modal/generate-report-modal/generate-report-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {filter, Observable, switchMap} from "rxjs";
@@ -16,7 +16,7 @@ import {saveAs} from "file-saver";
   styleUrls: ['./reports.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReportsComponent {
+export class ReportsComponent implements AfterViewInit {
 
   constructor(private dialog: MatDialog,
               private reportsService: ReportsService) { }
@@ -52,6 +52,10 @@ export class ReportsComponent {
       .pipe(
         filter(response => !!response)
       );
+  }
+
+  ngAfterViewInit() {
+    this.openGenerationReportModal();
   }
 
 }

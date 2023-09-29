@@ -1,6 +1,6 @@
-<div>
+<div class="scheduled-reports-actions">
   <button mat-raised-button (click)="openScheduleReportGeneration()">Schedule report generation</button>
-  <button mat-raised-button (click)="download()">Download</button>
+  <button mat-raised-button [disabled]="_selected?.status?.status != status.SUCCESS" (click)="download()">Download</button>
 </div>
 
 

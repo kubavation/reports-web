@@ -10,6 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ScheduledReport} from "./model/scheduled-report";
 import {saveAs} from "file-saver";
 import {FileUtil} from "../../../shared/util/file-util";
+import {SchedulingStatus} from "./model/scheduling-status";
 
 @Component({
   selector: 'app-scheduled-reports',
@@ -31,6 +32,8 @@ export class ScheduledReportsComponent {
 
 
   readonly columns = ['id', 'name', 'description', 'subsystem', 'fileName', 'status', 'at']
+
+  readonly status = SchedulingStatus;
 
   _selected: ScheduledReport | null;
 

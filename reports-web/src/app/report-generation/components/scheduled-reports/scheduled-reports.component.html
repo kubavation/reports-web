@@ -39,7 +39,7 @@
 
   <ng-container matColumnDef="at">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheduled At </th>
-    <td mat-cell *matCellDef="let element"> {{element.at}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.at | date: 'YYYY-MM-dd HH:MM'}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columns"></tr>

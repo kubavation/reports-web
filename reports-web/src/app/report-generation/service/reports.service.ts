@@ -29,4 +29,11 @@ export class ReportsService {
     return this.http.get<ScheduledReport[]>(`${environment.url}/reports-service/scheduled-reports`);
   }
 
+  public download(reportId: number): Observable<HttpResponse<Blob>> {
+    return this.http.get<Blob>(`${environment.url}/reports-service/api/${reportId}`, {
+      observe: 'response',
+      responseType: 'blob' as 'json'
+    });
+  }
+
 }

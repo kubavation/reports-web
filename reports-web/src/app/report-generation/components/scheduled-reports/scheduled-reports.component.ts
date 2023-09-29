@@ -8,6 +8,8 @@ import {ScheduleReportGeneration} from "../../model/schedule-report-generation";
 import {ScheduleAtModalComponent} from "../modal/schedule-at-modal/schedule-at-modal.component";
 import {MatTableDataSource} from "@angular/material/table";
 import {ScheduledReport} from "./model/scheduled-report";
+import {saveAs} from "file-saver";
+import {FileUtil} from "../../../shared/util/file-util";
 
 @Component({
   selector: 'app-scheduled-reports',
@@ -29,6 +31,8 @@ export class ScheduledReportsComponent {
 
 
   readonly columns = ['id', 'name', 'description', 'subsystem', 'fileName', 'status', 'at']
+
+  _selected: ScheduledReport | null;
 
   constructor(private dialog: MatDialog,
               private reportsService: ReportsService) { }
@@ -69,4 +73,12 @@ export class ScheduledReportsComponent {
     }
   }
 
+  download() {
+    this.reportsService.download(this._selected?.id)
+      .subscribe(response => saveAs(response.body, FileUtil.fileNameFromHeader(response)));
+  }
+
+  onSelection(row: ScheduledReport): void {
+    this._selected = row;
+  }
 }

@@ -1,5 +1,6 @@
 <div>
   <button mat-raised-button (click)="openScheduleReportGeneration()">Schedule report generation</button>
+  <button mat-raised-button (click)="download()">Download</button>
 </div>
 
 
@@ -43,6 +44,8 @@
 
   <tr mat-header-row *matHeaderRowDef="columns"></tr>
   <tr mat-row
+      (click)="onSelection(row)"
+      [class.row-selected]="_selected === row"
       *matRowDef="let row; columns: columns;"></tr>
 
   <tr class="mat-row" *matNoDataRow>

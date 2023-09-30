@@ -1,7 +1,7 @@
-<mat-tab-group animationDuration="0ms">
+<mat-tab-group animationDuration="0ms" style="height: 100%" [dynamicHeight]="true">
 
   <mat-tab label="Report generation">
-    <ng-template matTabContent>
+    <ng-template matTabContent >
       <div class="tab-content">
         <button mat-raised-button (click)="openGenerationReportModal()">Generate report</button>
       </div>

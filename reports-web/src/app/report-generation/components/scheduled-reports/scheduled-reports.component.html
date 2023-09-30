@@ -3,42 +3,41 @@
   <button mat-raised-button [disabled]="_selected?.status?.status != status.SUCCESS" (click)="download()">Download</button>
 </div>
 
-
-<table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8" matSort>
+<table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8" >
 
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <th mat-header-cell *matHeaderCellDef> ID </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+    <th mat-header-cell *matHeaderCellDef > Description </th>
     <td mat-cell *matCellDef="let element"> {{element.description}} </td>
   </ng-container>
 
   <ng-container matColumnDef="fileName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> File name </th>
+    <th mat-header-cell *matHeaderCellDef> File name </th>
     <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="subsystem">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Subsystem </th>
+    <th mat-header-cell *matHeaderCellDef> Subsystem </th>
     <td mat-cell *matCellDef="let element"> {{element.subsystem}} </td>
   </ng-container>
 
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+    <th mat-header-cell *matHeaderCellDef> Status </th>
     <td mat-cell *matCellDef="let element"> <app-scheduled-report-status [status]="element.status?.status"></app-scheduled-report-status> </td>
   </ng-container>
 
 
   <ng-container matColumnDef="at">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Scheduled At </th>
+    <th mat-header-cell *matHeaderCellDef > Scheduled At </th>
     <td mat-cell *matCellDef="let element"> {{element.at | date: 'YYYY-MM-dd HH:MM'}} </td>
   </ng-container>
 
@@ -54,3 +53,4 @@
     </td>
   </tr>
 </table>
+

@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Reports</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button >
+    logout
+  </button>
+</mat-toolbar>
+
+<div style="margin: 20px">
+  <button mat-raised-button [routerLink]="'report-patterns'">Report patterns</button>
+  <button mat-raised-button [routerLink]="'reports'">Reports</button>
+</div>
+
+
+<router-outlet></router-outlet>

@@ -5,7 +5,7 @@
   <span>Reports</span>
   <span class="example-spacer"></span>
   <button mat-icon-button >
-    logout
+    Log out
   </button>
 </mat-toolbar>
 
@@ -20,12 +20,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="router-outlet">
-      <div style="margin: 20px">
-        <button mat-raised-button [routerLink]="'report-patterns'">Report patterns</button>
-        <button mat-raised-button [routerLink]="'reports'">Reports</button>
-      </div>
-
+    <div class="router-outlet-container">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

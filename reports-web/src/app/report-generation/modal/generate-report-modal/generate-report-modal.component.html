@@ -84,5 +84,5 @@
 </div>
 <div mat-dialog-actions class="dialog-action-container">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="generate()" >Generate</button>
+  <button mat-button cdkFocusInitial (click)="generate()" [disabled]="!form.valid" >Generate</button>
 </div>

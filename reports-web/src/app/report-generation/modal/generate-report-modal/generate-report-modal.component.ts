@@ -31,7 +31,8 @@ export class GenerateReportModalComponent {
   patterns$ = this.form.get('subsystem').valueChanges
     .pipe(
       filter(subsystem => !!subsystem),
-      switchMap((subsystem: Subsystem) => this.reportPatternsService.reportPatterns(subsystem.shortcut))
+      switchMap((subsystem: Subsystem) => this.reportPatternsService.reportPatterns(subsystem.shortcut)),
+      tap(_ => this.pushParameters([]))
     )
 
   parameters$ = this.form.get('pattern').valueChanges

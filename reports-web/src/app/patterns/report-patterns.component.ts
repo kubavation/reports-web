@@ -42,7 +42,7 @@ export class ReportPatternsComponent implements AfterViewInit {
   dataSource$ = combineLatest([this.subsystemControl.valueChanges, this.refreshSubject]).pipe(
     map(([subsystem, _]) => subsystem),
     filter(subsystem => !!subsystem),
-    switchMap(({name}) => this.reportPatternsService.reportPatterns(name)),
+    switchMap(({shortcut}) => this.reportPatternsService.reportPatterns(shortcut)),
     map(patterns => {
       const dataSource = new MatTableDataSource<ReportPattern>(patterns);
       dataSource.paginator = this.paginator;

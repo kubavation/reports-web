@@ -1,0 +1,29 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Reports</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>power_settings_new</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container hasBackdrop="false">
+  <mat-sidenav #sidenav mode="side" opened="true" disableClose="true" style="width:10vw">
+    <mat-nav-list *ngFor="let menuOption of (menuOptions$ | async)">
+      <div>
+        <button class="menu-button" mat-raised-button (click)="router.navigateByUrl(menuOption.url)">
+          {{menuOption.name}}
+        </button>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="router-outlet-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+

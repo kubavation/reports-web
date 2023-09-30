@@ -11,11 +11,13 @@ import {SharedModule} from "./shared/shared.module";
 import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import {LoadingHttpInterceptor} from "./common/interceptors/loading-http.interceptor";
 import { LoaderComponent } from './common/loader/loader.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoaderComponent
+    LoaderComponent,
+    LayoutComponent
   ],
     imports: [
         BrowserModule,

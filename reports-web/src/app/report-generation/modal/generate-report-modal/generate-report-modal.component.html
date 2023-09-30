@@ -3,7 +3,7 @@
 
   <div [formGroup]="form">
     <div>
-      <mat-form-field>
+      <mat-form-field class="w-70">
         <mat-label>Subsystem</mat-label>
         <mat-select formControlName="subsystem" required>
           <mat-option *ngFor="let subsystem of modules$ | async" [value]="subsystem">
@@ -14,9 +14,9 @@
     </div>
 
     <div>
-      <mat-form-field>
+      <mat-form-field class="w-70">
         <mat-label>Pattern</mat-label>
-        <mat-select formControlName="pattern" required>
+        <mat-select formControlName="pattern" required [disabled]="!subsystemSet">
           <mat-option *ngFor="let pattern of patterns$ | async" [value]="pattern">
             {{pattern.name}}
           </mat-option>
@@ -24,28 +24,43 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="parameters$ | async">
+    <div>
+      <mat-form-field class="w-70">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title"/>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="w-100">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description"/>
+      </mat-form-field>
+    </div>
+
+
+    <div *ngIf="parameters$ | async" >
       <ng-container formArrayName="parameters">
         <ng-container *ngFor="let paramForm of parameters.controls; let i = index">
-          <div [formGroupName]="i">
-            <div class="params-container">
+          <div [formGroupName]="i" style="margin-top: 20px;">
+            <div class="params-container w-100">
               <ng-container [ngSwitch]="getParam(i).type">
                 <div *ngSwitchCase="parameterType.TEXT">
-                  <mat-form-field>
+                  <mat-form-field class="w-50">
                     <mat-label>{{getParam(i).name}}</mat-label>
                       <input matInput formControlName="value" class="w-100">
                   </mat-form-field>
                 </div>
                 <div *ngSwitchCase="parameterType.NUMBER">
-                  <mat-form-field>
+                  <mat-form-field class="w-50">
                     <mat-label>{{getParam(i).name}}</mat-label>
                     <input matInput formControlName="value" class="w-100" type="number">
                   </mat-form-field>
                 </div>
-                <div *ngSwitchCase="parameterType.DATE">
-                  <mat-form-field class="example-form-field">
+                <div *ngSwitchCase="parameterType.DATE" class="w-100">
+                  <mat-form-field class="w-50">
                     <mat-label>{{getParam(i).name}}</mat-label>
-                    <input formControlName="value" matInput [matDatepicker]="datepicker">
+                    <input  formControlName="value" matInput [matDatepicker]="datepicker">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
                     <mat-datepicker #datepicker>
@@ -69,5 +84,5 @@
 </div>
 <div mat-dialog-actions class="dialog-action-container">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="generate()" >Generate</button>
+  <button mat-button cdkFocusInitial (click)="generate()" [disabled]="!form.valid" >Generate</button>
 </div>

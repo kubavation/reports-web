@@ -8,8 +8,8 @@ import {SchedulingStatus} from "../model/scheduling-status";
     <ng-container [ngSwitch]=status>
          <div>
            <mat-icon *ngSwitchCase=statusType.SUCCESS>done</mat-icon>
-           <mat-icon *ngSwitchCase=statusType.FAILURE>attach_file</mat-icon>
-           <mat-icon *ngSwitchCase=statusType.IN_PROGRESS>cancel</mat-icon>
+           <mat-icon *ngSwitchCase=statusType.FAILURE>cancel</mat-icon>
+           <mat-icon *ngSwitchCase=statusType.IN_PROGRESS>access_time</mat-icon>
              {{status}}
          </div>
     </ng-container>`

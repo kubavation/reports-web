@@ -21,6 +21,8 @@ export class GenerateReportModalComponent {
   form = this.fb.group({
     subsystem: [null, Validators.required],
     pattern: [null, Validators.required],
+    title: [null, Validators.required],
+    description: [null],
     parameters: this.fb.array([])
   })
 
@@ -29,7 +31,8 @@ export class GenerateReportModalComponent {
   patterns$ = this.form.get('subsystem').valueChanges
     .pipe(
       filter(subsystem => !!subsystem),
-      switchMap((subsystem: Subsystem) => this.reportPatternsService.reportPatterns(subsystem.name))
+      switchMap((subsystem: Subsystem) => this.reportPatternsService.reportPatterns(subsystem.shortcut)),
+      tap(_ => this.pushParameters([]))
     )
 
   parameters$ = this.form.get('pattern').valueChanges
@@ -81,9 +84,13 @@ export class GenerateReportModalComponent {
     return {
       format: 'PDF', //todo
       reportName: (this.form.get('pattern').value as ReportPattern).name,
-      subsystem: (this.form.get('subsystem').value as Subsystem).name,
+      subsystem: (this.form.get('subsystem').value as Subsystem).shortcut,
       parameters: this.parameters.value.map(parameter => ({name: parameter.name, value: parameter.value}))
     }
+  }
+
+  get subsystemSet(): boolean {
+    return !!this.form.get('subsystem').value;
   }
 
 }

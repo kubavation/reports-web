@@ -20,6 +20,9 @@ import {NgxExtendedPdfViewerModule} from "ngx-extended-pdf-viewer";
 import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 
 
 
@@ -47,7 +50,10 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatNativeDateModule,
     NgxExtendedPdfViewerModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
   ],
   exports: [
     MatTableModule,
@@ -67,7 +73,10 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatNativeDateModule,
     NgxExtendedPdfViewerModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

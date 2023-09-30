@@ -3,6 +3,7 @@ import {of} from "rxjs";
 import {MatSidenav} from "@angular/material/sidenav";
 import {MENU_ITEMS} from "../app-routing.module";
 import {Router} from "@angular/router";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-layout',
@@ -16,11 +17,16 @@ export class LayoutComponent implements AfterViewInit {
 
   menuOptions$ = of(MENU_ITEMS);
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,
+              private keycloakService: KeycloakService) {}
 
 
   ngAfterViewInit(): void {
     this._sidenav.open()
+  }
+
+  logout(): void {
+    this.keycloakService.logout();
   }
 
 

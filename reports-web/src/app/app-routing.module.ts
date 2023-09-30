@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./keycloak/guards/auth.guard";
-import {AppComponent} from "./app.component";
 import {MenuItem} from "./shared/model/menu-item";
+import {HomeComponent} from "./home/home.component";
 
 export const MENU_ITEMS: MenuItem[] = [
   { url: 'report-patterns', name: 'Report patterns'},
@@ -10,9 +10,9 @@ export const MENU_ITEMS: MenuItem[] = [
 ];
 
 const routes: Routes = [
-  { path: '', component: AppComponent, canActivate: [AuthGuard] },
   { path: 'report-patterns', loadChildren: () => import('./patterns/report-patterns.module').then(m => m.ReportPatternsModule), canActivate: [AuthGuard] },
-  { path: 'reports', loadChildren: () => import('./report-generation/report-generation.module').then(m => m.ReportGenerationModule), canActivate: [AuthGuard] }
+  { path: 'reports', loadChildren: () => import('./report-generation/report-generation.module').then(m => m.ReportGenerationModule), canActivate: [AuthGuard] },
+  { path: '**', component: HomeComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

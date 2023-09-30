@@ -21,6 +21,8 @@ export class GenerateReportModalComponent {
   form = this.fb.group({
     subsystem: [null, Validators.required],
     pattern: [null, Validators.required],
+    title: [null, Validators.required],
+    description: [null],
     parameters: this.fb.array([])
   })
 
@@ -84,6 +86,10 @@ export class GenerateReportModalComponent {
       subsystem: (this.form.get('subsystem').value as Subsystem).shortcut,
       parameters: this.parameters.value.map(parameter => ({name: parameter.name, value: parameter.value}))
     }
+  }
+
+  get subsystemSet(): boolean {
+    return !!this.form.get('subsystem').value;
   }
 
 }
